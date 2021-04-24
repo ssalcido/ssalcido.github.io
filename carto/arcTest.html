@@ -85,7 +85,8 @@
       .pointColor('color')
       /* .pointLabel(d => 'Label?') */
       /* .pointLabel(d => `${d.pointData.place}`) */
-      .pointLabel(item => '<span class="tooltip">'+item.place+'<br> '+item.color+'</span>')
+      /* .pointLabel(item => '<span class="tooltip">' + item.place + '<br> ' + item.color + '</span>') */
+      .pointLabel(item => '<span id="beforeImage">' + item.place + '<br> ' + item.color + '</span>')
       // Misc specs
       .showAtmosphere(true)
       .atmosphereColor('darkblue')
@@ -98,21 +99,12 @@
   </script>
 
   <style>
-    .scene-tooltip {
-      color: white;
-      background-color: black;
-      border: 1px solid white;
+    #beforeImage {
       padding: 8px;
-      font-size: 13px;
-    }
-    .scene-infobulle {
-      color: white;
-      background-color: black;
+      font-family: 'Courier New', Courier, monospace;
+      display: inline-block;
       border: 1px solid white;
-      /* padding: 8px; */
-      font-size: large;
-      font-weight: 900;
+      background: black
     }
-
   </style>
 </body>
