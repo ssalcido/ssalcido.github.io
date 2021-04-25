@@ -1,0 +1,980 @@
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+
+  <script src="//unpkg.com/globe.gl"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div id="globeViz"></div>
+  <script>
+    // DATA
+    // Arcs Data
+    const arcsData = [
+      {
+        Trips: 1,
+        Date: 'December 2019',
+        Origin: 'China | Centre',
+        Destination: 'Ontario | London',
+        startLat: 34.713767,
+        startLng: 103.921332,
+        endLat: 42.9489852,
+        endLng: -81.3188311,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'December 2019',
+        Origin: 'China | Wuhan',
+        Destination: 'Ontario | Toronto',
+        startLat: 30.592849,
+        startLng: 114.305539,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'December 2019',
+        Origin: 'China | Wuhan',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 30.592849,
+        startLng: 114.305539,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'Iran',
+        Destination: 'Ontario | Ajax',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.8508553,
+        endLng: -79.0203732,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'Iran',
+        Destination: 'British Columbia | Fraser Health',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 49.221893,
+        endLng: -122.600108,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'China | Centre',
+        Destination: 'British Columbia | Interior Health',
+        startLat: 34.713767,
+        startLng: 103.921332,
+        endLat: 49.888858,
+        endLng: -119.492739,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'Iran',
+        Destination: 'Quebec | Montréal',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 45.504539,
+        endLng: -73.623806,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'China | Centre',
+        Destination: 'Ontario | North York',
+        startLat: 34.713767,
+        startLng: 103.921332,
+        endLat: 43.7615377,
+        endLng: -79.4110794,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'Iran',
+        Destination: 'Ontario | Richmond Hill',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.880078,
+        endLng: -79.439392,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'Egypt',
+        Destination: 'Ontario | Scarborough',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 43.7634018,
+        endLng: -79.2989459,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'January to February 2020',
+        Origin: 'Iran',
+        Destination: 'Ontario | Toronto',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'January to February 2020',
+        Origin: 'Iran',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 1 to 3',
+        Origin: 'Iran',
+        Destination: 'British Columbia | Fraser Health',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 49.221893,
+        endLng: -122.600108,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 1 to 3',
+        Origin: 'Egypt',
+        Destination: 'Ontario | North York',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 43.7615377,
+        endLng: -79.4110794,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 1 to 3',
+        Origin: 'Egypt',
+        Destination: 'Ontario | Richmond Hill',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 43.880078,
+        endLng: -79.439392,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 1 to 3',
+        Origin: 'Egypt',
+        Destination: 'Ontario | Toronto',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 1 to 3',
+        Origin: 'Iran',
+        Destination: 'Ontario | Toronto',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.5
+      },
+      {
+        Trips: 3,
+        Date: 'March 1 to 3',
+        Origin: 'Iran',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.75
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'Germany',
+        Destination: 'Ontario | Brampton',
+        startLat: 51.165691,
+        startLng: 10.451526,
+        endLat: 43.7315479,
+        endLng: -79.7624177,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Grand Princess (St.Francisco-Mexico)',
+        Destination: 'Alberta | Calgary',
+        startLat: 36.534275,
+        startLng: -123.657297,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'MS Braemar (Caribbean)',
+        Destination: 'Alberta | Calgary',
+        startLat: 14.5401107,
+        startLng: -74.9676365,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Illinois',
+        Destination: 'Alberta | Edmonton',
+        startLat: 40.6331249,
+        startLng: -89.3985283,
+        endLat: 53.544388,
+        endLng: -113.490929,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Grand Princess (St.Francisco-Mexico)',
+        Destination: 'Alberta | Edmonton',
+        startLat: 36.534275,
+        startLng: -123.657297,
+        endLat: 53.544388,
+        endLng: -113.490929,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Seattle',
+        Destination: 'British Columbia | Fraser Health',
+        startLat: 47.6062095,
+        startLng: -122.3320708,
+        endLat: 49.221893,
+        endLng: -122.600108,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Grand Princess (St.Francisco-Mexico)',
+        Destination: 'British Columbia | Fraser Health',
+        startLat: 36.534275,
+        startLng: -123.657297,
+        endLat: 49.221893,
+        endLng: -122.600108,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'Iran',
+        Destination: 'British Columbia | Fraser Health',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 49.221893,
+        endLng: -122.600108,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'Italy',
+        Destination: 'Ontario | Kitchener',
+        startLat: 41.87194,
+        startLng: 12.56738,
+        endLat: 43.4516395,
+        endLng: -80.4925337,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Grand Princess (St.Francisco-Mexico)',
+        Destination: 'Ontario | Mississauga',
+        startLat: 36.534275,
+        startLng: -123.657297,
+        endLat: 43.5890452,
+        endLng: -79.6441198,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'India',
+        Destination: 'Quebec | Mont-Laurier',
+        startLat: 20.593684,
+        startLng: 78.96288,
+        endLat: 46.5504129,
+        endLng: -75.4960308,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'France',
+        Destination: 'Quebec | Montérégie',
+        startLat: 46.227638,
+        startLng: 2.213749,
+        endLat: 45.5105154,
+        endLng: -73.4868642,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Grand Princess (St.Francisco-Mexico)',
+        Destination: 'Quebec | Montérégie',
+        startLat: 36.534275,
+        startLng: -123.657297,
+        endLat: 45.5105154,
+        endLng: -73.4868642,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'England',
+        Destination: 'Quebec | Montréal',
+        startLat: 52.3555177,
+        startLng: -1.1743197,
+        endLat: 45.504539,
+        endLng: -73.623806,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 4 to 8',
+        Origin: 'Iran',
+        Destination: 'Ontario | North York',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.7615377,
+        endLng: -79.4110794,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'Iran',
+        Destination: 'Ontario | Richmond Hill',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.880078,
+        endLng: -79.439392,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'France',
+        Destination: 'Ontario | Scarborough',
+        startLat: 46.227638,
+        startLng: 2.213749,
+        endLat: 43.7634018,
+        endLng: -79.2989459,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Colorado',
+        Destination: 'Ontario | Toronto',
+        startLat: 39.5500507,
+        startLng: -105.7820674,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Las Vegas',
+        Destination: 'Ontario | Toronto',
+        startLat: 36.1699412,
+        startLng: -115.1398296,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'United States | Washington',
+        Destination: 'Ontario | Toronto',
+        startLat: 38.90958,
+        startLng: -77.028643,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 4 to 8',
+        Origin: 'Iran',
+        Destination: 'Ontario | Toronto',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'Italy',
+        Destination: 'Ontario | Toronto',
+        startLat: 41.87194,
+        startLng: 12.56738,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'India',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 20.593684,
+        startLng: 78.96288,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 3,
+        Date: 'March 4 to 8',
+        Origin: 'Iran',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.75
+      },
+      {
+        Trips: 1,
+        Date: 'March 4 to 8',
+        Origin: 'Italy',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 41.87194,
+        startLng: 12.56738,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Germany',
+        Destination: 'Alberta | Calgary',
+        startLat: 51.165691,
+        startLng: 10.451526,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 10 to 12',
+        Origin: 'Egypt',
+        Destination: 'Alberta | Calgary',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Spain',
+        Destination: 'Alberta | Calgary',
+        startLat: 40.463667,
+        startLng: -3.74922,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Centre',
+        Destination: 'Alberta | Calgary',
+        startLat: 39.951993,
+        startLng: -98.533218,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Florida',
+        Destination: 'Alberta | Calgary',
+        startLat: 27.770715,
+        startLng: -81.485538,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Mexico',
+        Destination: 'Alberta | Calgary',
+        startLat: 23.634501,
+        startLng: -102.552784,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'MS Braemar (Caribbean)',
+        Destination: 'Alberta | Calgary',
+        startLat: 14.5401107,
+        startLng: -74.9676365,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.25
+      },
+      {
+        Trips: 2,
+        Date: 'March 10 to 12',
+        Origin: 'Panama',
+        Destination: 'Alberta | Calgary',
+        startLat: 8.537981,
+        startLng: -80.782127,
+        endLat: 51.048615,
+        endLng: -114.070847,
+        stroke: 0.5
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Washington State',
+        Destination: 'Alberta | Central zone',
+        startLat: 47.7510741,
+        startLng: -120.7401385,
+        endLat: 52.270632,
+        endLng: -113.810901,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'MS Braemar (Caribbean)',
+        Destination: 'Quebec | Chaudière-Appalaches',
+        startLat: 14.5401107,
+        startLng: -74.9676365,
+        endLat: 45.8595144,
+        endLng: -71.5588482,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'France',
+        Destination: 'Alberta | Edmonton',
+        startLat: 46.227638,
+        startLng: 2.213749,
+        endLat: 53.544388,
+        endLng: -113.490929,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Iran',
+        Destination: 'Alberta | Edmonton',
+        startLat: 32.427908,
+        startLng: 53.688046,
+        endLat: 53.544388,
+        endLng: -113.490929,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Philippines',
+        Destination: 'Alberta | Edmonton',
+        startLat: 12.879721,
+        startLng: 121.774017,
+        endLat: 53.544388,
+        endLng: -113.490929,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Italy',
+        Destination: 'Quebec | Estrie',
+        startLat: 41.87194,
+        startLng: 12.56738,
+        endLat: 45.48156,
+        endLng: -71.66792,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Egypt',
+        Destination: 'British Columbia | Fraser Health',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 49.221893,
+        endLng: -122.600108,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Costa Rica',
+        Destination: 'Ontario | Halton',
+        startLat: 9.748917,
+        startLng: -83.753428,
+        endLat: 43.5325372,
+        endLng: -79.8744836,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Centre',
+        Destination: 'Ontario | Halton',
+        startLat: 39.951993,
+        startLng: -98.533218,
+        endLat: 43.5325372,
+        endLng: -79.8744836,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Egypt',
+        Destination: 'British Columbia | Island Health',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 49.651812,
+        endLng: -125.447278,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Philippines',
+        Destination: 'Manitoba | Winnipeg Regional Health Authority',
+        startLat: 12.879721,
+        startLng: 121.774017,
+        endLat: 49.873874,
+        endLng: -97.2130396,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'France',
+        Destination: 'Quebec | Mauricie (Trois-Rivières)',
+        startLat: 46.227638,
+        startLng: 2.213749,
+        endLat: 46.3162139,
+        endLng: -72.581664,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'North West Europe | Irlande',
+        Destination: 'Quebec | Montréal',
+        startLat: 53.41291,
+        startLng: -8.24389,
+        endLat: 45.504539,
+        endLng: -73.623806,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'France',
+        Destination: 'New Brunswick | Zone 1',
+        startLat: 46.227638,
+        startLng: 2.213749,
+        endLat: 46.087523,
+        endLng: -64.773136,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Austria',
+        Destination: 'Ontario | Ottawa',
+        startLat: 47.516231,
+        startLng: 14.550072,
+        endLat: 45.4215296,
+        endLng: -75.6971931,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Italy',
+        Destination: 'Ontario | Ottawa',
+        startLat: 41.87194,
+        startLng: 12.56738,
+        endLat: 45.4215296,
+        endLng: -75.6971931,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Egypt',
+        Destination: 'Saskatchewan',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 52.133806,
+        endLng: -106.670442,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Spain',
+        Destination: 'Ontario | Simcoe',
+        startLat: 40.463667,
+        startLng: -3.74922,
+        endLat: 42.8372632,
+        endLng: -80.3040424,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Canada | Toronto',
+        Destination: 'Ontario | Sudbury',
+        startLat: 43.653226,
+        startLng: -79.3831843,
+        endLat: 46.4917317,
+        endLng: -80.993029,
+        stroke: 0.25
+      },
+      {
+        Trips: 7,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Centre',
+        Destination: 'Ontario | Toronto',
+        startLat: 39.951993,
+        startLng: -98.533218,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 1.75
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Europe Centre',
+        Destination: 'Ontario | Toronto',
+        startLat: 50.1648815,
+        startLng: 10.5113973,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Swiss',
+        Destination: 'Ontario | Toronto',
+        startLat: 46.818188,
+        startLng: 8.227512,
+        endLat: 43.653226,
+        endLng: -79.3831843,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Germany',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 51.165691,
+        startLng: 10.451526,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 4,
+        Date: 'March 10 to 12',
+        Origin: 'Egypt',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 1
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Grand Princess (St.Francisco-Mexico)',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 36.534275,
+        startLng: -123.657297,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'UK',
+        Destination: 'British Columbia | Vancouver Costal',
+        startLat: 55.378051,
+        startLng: -3.435973,
+        endLat: 49.263838,
+        endLng: -123.117977,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'United States | Centre',
+        Destination: 'Ontario | Waterloo',
+        startLat: 39.951993,
+        startLng: -98.533218,
+        endLat: 43.4823217,
+        endLng: -80.6167585,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Puerto Rico',
+        Destination: 'Ontario | Waterloo',
+        startLat: 18.220833,
+        startLng: -66.590149,
+        endLat: 43.4823217,
+        endLng: -80.6167585,
+        stroke: 0.25
+      },
+      {
+        Trips: 1,
+        Date: 'March 10 to 12',
+        Origin: 'Egypt',
+        Destination: 'Ontario | York',
+        startLat: 26.820553,
+        startLng: 30.802498,
+        endLat: 43.6896191,
+        endLng: -79.479188,
+        stroke: 0.25
+      }
+    ]
+    // Date Filters
+    const arcsDataP1 = arcsData.filter(function (date) {
+      return date.Date == 'December 2019';
+    });
+    const arcsDataP2 = arcsData.filter(function (date) {
+      return date.Date == 'January to February 2020';
+    });
+    const arcsDataP3 = arcsData.filter(function (date) {
+      return date.Date == 'March 1 to 3';
+    });
+    const arcsDataP4 = arcsData.filter(function (date) {
+      return date.Date == 'March 4 to 8';
+    });
+    const arcsDataP5 = arcsData.filter(function (date) {
+      return date.Date == 'March 10 to 12';
+    });
+
+    // GLOBE
+    const OPACITY = 0.8;
+    const STROKE = .8;
+    const myGlobe = Globe()
+      (document.getElementById('globeViz'))
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+      .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+      .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+
+      // Arcs specs
+      .arcsData(arcsData)
+      .arcColor(['#512DA8', '#FFC400'])
+      .arcDashAnimateTime(5000)
+      .arcLabel(item =>
+        '<span id="toolTip">' +
+        '<span id="toolTipHeadline1">' +
+        item.Date + '<br>' +
+        '</span>' +
+        '<span id="toolTipHeadline2">' +
+        item.Trips + ' Airflight(s) ' + '<br>' +
+        '</span>' +
+        'From: ' + item.Origin +
+        '<br>' + 'To: ' + item.Destination +
+        '</span>')
+      .arcStroke('stroke')
+      .onArcHover(hoverArc => myGlobe
+        .arcColor(d => {
+          const op = !hoverArc ? OPACITY : d === hoverArc ? 1 : OPACITY / 12;
+          return [`rgba(81, 45, 168, ${op})`, `rgba(255, 196, 0, ${op})`];
+        })
+      )
+
+      // Misc specs
+      .showAtmosphere(true)
+      .atmosphereColor('#845CCB')
+      .pointOfView({ lat: 56, lng: -96.3, altitude: 2 }) // aim at Canada centroid
+
+    // Add auto-rotation
+    myGlobe.controls().autoRotate = false;
+    myGlobe.controls().autoRotateSpeed = 0.2;
+
+  </script>
+
+  <style>
+    #toolTip {
+      padding: 12px;
+      font-size: 16px;
+      font-family: 'Barlow', Courier, monospace;
+      display: inline-block;
+      border: 1px solid white;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.8)
+    }
+
+    #toolTipHeadline1 {
+      font-weight: 700;
+    }
+
+    #toolTipHeadline2 {
+      color: #FFC400;
+    }
+  </style>
+</body>
