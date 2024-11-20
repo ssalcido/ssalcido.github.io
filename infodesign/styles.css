@@ -18,11 +18,18 @@ body {
   font-family: Inter, Helvetica, Arial, sans-serif;
 }
 
+
+
 #mindmap {
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+
+
   
   rect {
     fill: none;
@@ -85,4 +92,47 @@ body {
     fill: none;
     stroke: #ccc;
     stroke-width: 2.0px;
+  }
+
+  /* buttonStyles */
+
+  button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 4px 12px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underlines */
+    display: inline-block; /* Inline-block for layout control */
+    font-size: 12px; /* Font size */
+    margin: 5px 2px; /* Margin between buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 32px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  button:active {
+    background-color: #3e8e41; /* Even darker green on active click */
+    transform: scale(0.95); /* Slight shrink effect */
+  }
+  
+  #expand-all {
+    background-color: #007BFF; /* Blue background for expand */
+  }
+  
+  #expand-all:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  #collapse-all {
+    background-color: #f44336; /* Red background for collapse */
+  }
+  
+  #collapse-all:hover {
+    background-color: #c0392b; /* Darker red on hover */
   }
