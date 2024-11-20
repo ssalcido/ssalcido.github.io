@@ -1,8 +1,8 @@
 var json_data = {
-  "name": " ",
+  "name": "Information Design",
   "children": [
     {
-      "name": "Interactive tools",
+      "name": "👾 Interactive tools",
       "free": true,
       "description": "Interactive authoring tools",
       "children": [
@@ -207,7 +207,7 @@ var json_data = {
   ]
 }
 
-var m = [20, 120, 20, 20],
+var m = [20, 120, 20, 240],
   w = 1280 - m[1] - m[3],
   h = 800 - m[0] - m[2],
   i = 0,
@@ -235,6 +235,8 @@ function toggleAll(d) {
     toggle(d);
   }
 }
+
+
 
 // Initialize the display to show a few nodes.
 // root.children.forEach(toggleAll);
