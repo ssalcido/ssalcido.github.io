@@ -1,0 +1,63 @@
+ body, html {
+    height: 100%;
+    margin: 0;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling */
+  }
+
+
+body {
+    background: #f7f9fb;
+    color: #1b1b1b;
+    font-family: Inter, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 30%;
+}
+
+.french {
+    margin-top: 8px;
+    font-weight: 400;
+    font-style: italic;
+    color: #8a8a8a;
+}
+a {
+	color: #333333;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+	background: #ffff66;
+	color: #000000;
+}
+
+a:active {
+	background: #000000;
+	color: #ffffff;
+}
+   
+/* Styling of default typographic headers and elements */
+
+h1 {
+    font-size: 22px;
+    line-height: 165%;
+}
+
+h2 {
+    font-size: 16px;
+    line-height: 165%;
+}
+
+h3 {
+    font-size: 14px;
+    line-height: 150%;
+}
+
+blockquote {
+    color: #666666;
+    margin: 0;
+}
