@@ -1,6 +1,8 @@
-var m = [20, 120, 20, 240],
-  w = 1280 - m[1] - m[3],
-  h = 800 - m[0] - m[2],
+var m = [0, 0, 0, 156],
+  w = 1160 - m[1] - m[3],
+  h = 640 - m[0] - m[2],
+  // w = 1280,
+  // h = 720,
   i = 0,
   root;
 
@@ -14,10 +16,12 @@ var diagonal = d3.svg.diagonal()
 
 // Create the SVG container
 var vis = d3.select("#mindmap").append("svg")
-  .attr("width", w + m[1] + m[3])
-  .attr("height", h + m[0] + m[2])
-  .append("g")
-  .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+    .attr("width", w + m[1] + m[3]) // Ensure it matches the container
+    .attr("height", h + m[0] + m[2]) // Matches the container height
+    .attr("viewBox", `0 0 ${w + m[1] + m[3]} ${h}`) // Add responsive viewBox
+    .style("overflow", "visible") // Ensure horizontal overflow is visible
+    .append("g")
+    .attr("transform", `translate(${m[3]}, ${m[0]})`);
 
 // Fetch data from the external JSON file
 d3.json("data.json", function (error, json) {
@@ -155,22 +159,22 @@ d3.json("data.json", function (error, json) {
   });
 
 
-// Expand all nodes
-function expandAll(d) {
-  if (d._children) {
-    d.children = d._children;
-    d._children = null;
+  // Expand all nodes
+  function expandAll(d) {
+    if (d._children) {
+      d.children = d._children;
+      d._children = null;
+    }
+    if (d.children) {
+      d.children.forEach(expandAll);
+    }
   }
-  if (d.children) {
-    d.children.forEach(expandAll);
-  }
-}
 
-// Add event listener for expanding all nodes
-document.getElementById("expand-all").addEventListener("click", function () {
-  expandAll(root);
-  update(root);
-});
+  // Add event listener for expanding all nodes
+  document.getElementById("expand-all").addEventListener("click", function () {
+    expandAll(root);
+    update(root);
+  });
 
 
 
