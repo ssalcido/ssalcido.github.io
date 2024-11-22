@@ -30,7 +30,7 @@ function zoomed() {
 }
 
 // Fetch data from the external JSON file
-d3.json("data.json", function (error, json) {
+d3.json("data2.json", function (error, json) {
   if (error) {
     console.error("Error loading data:", error);
     throw error;
