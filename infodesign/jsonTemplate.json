@@ -1,0 +1,35 @@
+{
+    "name": "Le design d'information",
+    "children": [
+      {
+        "name": "Éducation",
+        "description": "Cheminement scolaire et conditions d’admission",
+        "children": [
+          {
+            "name": "Cheminement",
+            "description": "Cheminement scolaire et conditions d’admission"
+          },
+                  {
+            "name": "Cheminement scolaire",
+            "description": "Cheminement scolaire et conditions d’admission"
+          }
+        ]
+      },
+      {
+        "name": "Secteurs d’activités",
+        "description": "Secteurs d’activités possibles"
+      },
+      {
+        "name": "Responsabilités",
+        "description": "Tâches et responsabilités du designer d'information"
+      },
+      {
+        "name": "Compétences",
+        "description": "Compétences et aptitudes à developer"
+      },
+      {
+        "name": "Avantages et défis",
+        "description": "Les avantages et les inconvénients du métier"
+      }
+    ]
+  }

@@ -1,6 +1,6 @@
-var m = [0, 0, 0, 156],
-  w = 1160 - m[1] - m[3],
-  h = 640 - m[0] - m[2],
+var m = [0, 0, 0, 0],
+  w = 1280 - m[1] - m[3],
+  h = 720 - m[0] - m[2],
   i = 0,
   root;
 
@@ -13,14 +13,21 @@ var diagonal = d3.svg.diagonal()
   .projection(function (d) { return [d.y, d.x]; });
 
 // Create the SVG container
-var vis = d3.select("#mindmap").append("svg")
-    .attr("width", w + m[1] + m[3]) // Ensure it matches the container
-    .attr("height", h + m[0] + m[2]) // Matches the container height
-    .attr("viewBox", `0 0 ${w + m[1] + m[3]} ${h}`) // Add responsive viewBox
-    .style("overflow", "visible") // Ensure horizontal overflow is visible
-    .append("g")
-    .attr("transform", `translate(${m[3]}, ${m[0]})`);
+var svg = d3.select("#mindmap").append("svg")
+  .attr("width", w + m[1] + m[3])
+  .attr("height", h + m[0] + m[2])
+  .attr("viewBox", `0 0 ${w + m[1] + m[3]} ${h}`)
+  .style("cursor", "grab") // Change cursor to indicate dragging
+  .call(d3.behavior.zoom() // Enable zoom and pan
+    .scaleExtent([0.5, 3]) // Limit zoom scale
+    .on("zoom", zoomed))
+  .append("g") // Create a group for the visualization
+  .attr("transform", `translate(${m[3]}, ${m[0]})`);
 
+// Zoom function to adjust the group transform
+function zoomed() {
+  svg.attr("transform", `translate(${d3.event.translate}) scale(${d3.event.scale})`);
+}
 
 // Fetch data from the external JSON file
 d3.json("data.json", function (error, json) {
@@ -30,7 +37,7 @@ d3.json("data.json", function (error, json) {
   }
 
   root = json;
-  root.x0 = h / 2;
+  root.x0 = h / 2; // Start vertically centered
   root.y0 = 0;
 
   // Initialize and update the visualization
@@ -46,7 +53,7 @@ d3.json("data.json", function (error, json) {
     nodes.forEach(function (d) { d.y = d.depth * 180; });
 
     // Update the nodes
-    var node = vis.selectAll("g.node")
+    var node = svg.selectAll("g.node")
       .data(nodes, function (d) { return d.id || (d.id = ++i); });
 
     // Enter any new nodes at the parent's previous position
@@ -97,7 +104,7 @@ d3.json("data.json", function (error, json) {
       .style("fill-opacity", 1e-6);
 
     // Update the links
-    var link = vis.selectAll("path.link")
+    var link = svg.selectAll("path.link")
       .data(tree.links(nodes), function (d) { return d.target.id; });
 
     // Enter any new links at the parent's previous position
@@ -143,6 +150,7 @@ d3.json("data.json", function (error, json) {
     }
   }
 
+
   // Collapse all nodes
   function collapseAll(d) {
     if (d.children) {
@@ -174,7 +182,5 @@ d3.json("data.json", function (error, json) {
     expandAll(root);
     update(root);
   });
-
-
 
 });
