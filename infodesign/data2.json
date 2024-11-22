@@ -6,10 +6,84 @@
       "description": "Cheminement scolaire et conditions d’admission",
       "children": [
         {
-          "name": "Cheminement scolaire"
+          "name": "Cheminement scolaire",
+          "children": [
+            {
+              "name": "Cégep",
+              "children": [
+                {
+                  "name": "Arts visuels"
+                },
+                {
+                  "name": "Informatique"
+                },
+                {
+                  "name": "Mathématiques"
+                },
+                {
+                  "name": "Communication"
+                }
+              ]
+            },
+            {
+              "name": "Baccalauréat",
+              "children": [
+                {
+                  "name": "Design d’information"
+                },
+                {
+                  "name": "Conception graphique"
+                },
+                {
+                  "name": "Design d’interaction"
+                },
+                {
+                  "name": "Visualisation des données"
+                },
+                {
+                  "name": "Conception de l’expérience utilisateur (UX)"
+                },
+                {
+                  "name": "Interaction homme-machine (IHM)"
+                }
+              ]
+            },
+            {
+              "name": "Certifications",
+              "children": [
+                {
+                  "name": "Tutoriels et certificats en ligne"
+                },
+                {
+                  "name": "Diplômes d'Études Collégiales (DEC)"
+                },
+                {
+                  "name": "Diplômes d'études supérieures spécialisées (DESS)"
+                }
+              ]
+            },
+            {
+              "name": "Maîtrise",
+              "children": [
+                {
+                  "name": "Design d’information"
+                },
+                {
+                  "name": "Visualisation des données"
+                },
+                {
+                  "name": "Design d’interaction"
+                },
+                {
+                  "name": "Communication digitale"
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "Écoles"
+          "name": "Écoles",
+          "children": []
         }
       ]
     },
